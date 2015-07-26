@@ -1,7 +1,7 @@
 Options -MultiViews
 RewriteEngine On
 
-RewriteBase /maybrat_mvc
+RewriteBase /mvc
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f

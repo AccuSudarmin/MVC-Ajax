@@ -16,16 +16,18 @@
 			require_once './app/views/' . $view . '.php';
 		}
 
-		public function library($lib) {
+		public function library($lib, $param = null) {
 			require_once './app/libraries/' . $lib . '.php';
-
-			if (class_exists('$lib')) {
+			
+			if (class_exists($lib)) {
 				//chekking if class exist  in new library
 
 				//and set new class based on name of library
 				//class can call using lowercase, Example: $this->example_class
 				$class_name = strtolower($lib);
-				$this->$class_name = new $lib;
+
+				if( $param != null ) $this->$class_name = new $lib ($param);
+				else $this->$class_name = new $lib;
 
 			}
 

@@ -3,10 +3,10 @@ class Ajax {
 
   function __construct ( $setting = array() ) {
     /*
-      {action: http://contoh.com/savedata.php , controller: default, id: idnya}
+      {action: http://contoh.com/savedata.php , controller: default, target: http://contoh.com , id: idnya}
     */
-    $this->openForm = "<form onsubmit='" . $setting['controller'] . "( this , \"" . $setting['target'] . "\" . \"" . $setting['action'] . "\")'";
-    $this->openForm .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" | "";
+    $this->openForm = "<form onsubmit='" . $setting['controller'] . "( this , \"" . $setting['target'] . "\" , \"" . $setting['action'] . "\");'";
+    $this->openForm .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" : "";
     $this->openForm .= ">";
 
     $this->input = "";
@@ -16,11 +16,12 @@ class Ajax {
 
   public function input ( $setting = array() ) {
     $input = "<p> <input type='";
-    $input .= isset( $setting['type'] ) ? $setting['type'] . "' " | "text' ";
-    $input .= isset ( $setting['name'] ) ? "name='" . $setting['name'] . "' " | "";
-    $input .= isset( $setting['id'] ) ? "id='" . $setting['id'] . "' " | "";
-    $input .= isset( $setting['class'] ) ? "class='" . $setting['class'] . "' " | "";
-    $input .= isset( $setting['value'] ) ? "value='" . $setting['value'] . "' " | "";
+    $input .= isset( $setting['type'] ) ? $setting['type'] . "' " : "text' ";
+    $input .= isset ( $setting['name'] ) ? "name='" . $setting['name'] . "' " : "";
+    $input .= isset( $setting['id'] ) ? "id='" . $setting['id'] . "' " : "";
+    $input .= isset( $setting['class'] ) ? "class='" . $setting['class'] . "' " : "";
+    $input .= isset( $setting['value'] ) ? "value='" . $setting['value'] . "' " : "";
+    $input .= isset( $setting['placeholder'] ) ? "placeholder='" . $setting['placeholder'] . "' " : "";
 
     if (isset($setting['required'])) {
       if ($setting['required']) $input .= "required";
@@ -33,29 +34,31 @@ class Ajax {
 
   public function select ( $setting = array() ) {
     $select = "<p> <select ";
-    $select .= isset( $setting['name'] ) ? "name='" . $setting['name'] . "' " | "";
-    $select .= isset( $setting['id'] ) ? "id='" . $setting['id'] . "' " | "";
-    $select .= isset( $setting['class'] ) ? "class='" . $setting['class'] . "' " | "";
+    $select .= isset( $setting['name'] ) ? "name='" . $setting['name'] . "' " : "";
+    $select .= isset( $setting['id'] ) ? "id='" . $setting['id'] . "' " : "";
+    $select .= isset( $setting['class'] ) ? "class='" . $setting['class'] . "' " : "";
 
     if ( isset( $setting['option'] ) ) {
       foreach ( $setting['option'] as $option ) {
         $select .= "<option ";
-        $select .= isset( $option['value'] ) ? "value='" . $option['value'] . "' " | "";
+        $select .= isset( $option['value'] ) ? "value='" . $option['value'] . "' " : "";
         $select .= "> ";
-        $select .= isset( $option['alias'] ) ? $option['alias'] | "";
+        $select .= isset( $option['alias'] ) ? $option['alias'] : "";
         $select .= "</option>";
       }
     }
 
     $select .= "</select> </p>";
+
+    $this->input .= $select;
   }
 
   public function render() {
-    $ajax .= "<script src='" . SITE_PATH . "/app/core/xmlhttp.js'></script>";
-    $ajax .= "<script src='" . SITE_PATH . "/app/ajaxController/controller.js'></script>";
+    $ajax = "<script src='" . SITE_PATH . "/public/js/xmlhttp.js'></script>";
+    $ajax .= "<script src='" . SITE_PATH . "/public/js/controller.js'></script>";
     $render = $this->openForm . $this->input . $this->endForm . $ajax;
 
-    return render;
+    return $render;
   }
 }
 ?>

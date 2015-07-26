@@ -3,14 +3,14 @@
 	class Home extends Controller
 	{
 		public function index(){
-			
-			$this->view('header');
+
+			// $this->view('header');
 			// $this->view('navbar');
 
 			// $slider = $this->model('slider');
 			// $article = $this->model('article');
 
-			$this->library('dbsql');
+			// $this->library('dbsql');
 
 			// echo "<div id='main'>";
 			// 	$this->view('home/slider', array($slider->total() , $slider->all()));
@@ -24,7 +24,7 @@
 			// echo "		</div>
 			// 		</div>
 			// 	";
-			
+
 			// echo "</div>";
 
 		}
