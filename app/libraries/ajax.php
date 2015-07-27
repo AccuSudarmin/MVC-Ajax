@@ -5,7 +5,7 @@ class Ajax {
     /*
       {action: http://contoh.com/savedata.php , controller: default, target: http://contoh.com , id: idnya}
     */
-    $this->openForm = "<form onsubmit=\"" . $setting['controller'] . "( this , '" . $setting['target'] . "' , '" . $setting['action'] . "'); return false;\"";
+    $this->openForm = "<form method='POST' in-controller='" . $setting['controller'] . "' in-action='" . $setting['action'] . "' , in-success='" . $setting['target'] . "' ";
     $this->openForm .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" : "";
     $this->openForm .= ">";
 
@@ -54,8 +54,7 @@ class Ajax {
   }
 
   public function render() {
-    $ajax = "<script src='" . SITE_PATH . "/public/js/xmlhttp.js'></script>";
-    $ajax .= "<script src='" . SITE_PATH . "/public/js/controller.js'></script>";
+    $ajax = "<script src='" . SITE_PATH . "/public/js/lib/inforuh.js'></script>";
     $render = $this->openForm . $this->input . $this->endForm . $ajax;
 
     return $render;

@@ -8,10 +8,10 @@
       $this->library('Ajax', array(
 				"target" => SITE_PATH . "/ajaxpost" ,
         "action" => SITE_PATH . "/ajaxpost/save" ,
-        "controller" => "def"
+        "controller" => "def-post"
       ));
 
-      $this->ajax->input( array( "type" => "text" , "name" => "nama"));
+      $this->ajax->input( array( "type" => "text" , "name" => "nama" , "required" => true ));
       $this->ajax->input( array( "type" => "submit" , "name" => "save" , "value" => "Save" ));
 
       $form = $this->ajax->render();
