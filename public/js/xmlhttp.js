@@ -7,7 +7,8 @@ var ajax = function ( form ) {
       var name = elem[i].name
         , value = elem[i].value;
 
-      inputElm += name + "=" + value;
+      if (i === 0) inputElm += name + "=" + value
+      else inputElm += "&" + name + "=" + value;
     }
 
     return inputElm;
@@ -19,7 +20,7 @@ var ajax = function ( form ) {
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            return callback(xmlhttp.responseText);
+            callback(xmlhttp.responseText);
         }
     }
 
@@ -33,7 +34,7 @@ var ajax = function ( form ) {
 
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            return callback(xmlhttp.responseText);
+            callback(xmlhttp.responseText);
         }
     }
 

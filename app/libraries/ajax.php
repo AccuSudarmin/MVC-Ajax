@@ -5,7 +5,7 @@ class Ajax {
     /*
       {action: http://contoh.com/savedata.php , controller: default, target: http://contoh.com , id: idnya}
     */
-    $this->openForm = "<form onsubmit='" . $setting['controller'] . "( this , \"" . $setting['target'] . "\" , \"" . $setting['action'] . "\");'";
+    $this->openForm = "<form onsubmit=\"" . $setting['controller'] . "( this , '" . $setting['target'] . "' , '" . $setting['action'] . "'); return false;\"";
     $this->openForm .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" : "";
     $this->openForm .= ">";
 

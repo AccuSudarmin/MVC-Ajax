@@ -6,8 +6,8 @@
 		public function index()
     {
       $this->library('Ajax', array(
+				"target" => SITE_PATH . "/ajaxpost" ,
         "action" => SITE_PATH . "/ajaxpost/save" ,
-        "target" => SITE_PATH . "/ajaxpost" ,
         "controller" => "def"
       ));
 
@@ -20,7 +20,7 @@
 		}
 
     public function save(){
-
+			echo $_POST['nama'];
     }
 
 	}
