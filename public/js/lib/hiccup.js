@@ -71,9 +71,12 @@ var hiccupController = function (form) {
   }
 
   var createOverlay = function ( text ) {
-    var overlay = ElementBuild({ "tag" : "div" , "class" : "overlay" }, text);
+    var overlay_child = ElementBuild({ "tag" : "div" , "class" : "hiccup-modal-box-inside" }, text)
+      , overlay = ElementBuild({ "tag" : "div" , "class" : "hiccup-modal-box" });
 
-    document.body.appendChild(overlay);
+    overlay.appendChild(overlay_child);
+
+    document.body.insertBefore(overlay, document.body.firstChild);
 
     var closeElement = setTimeout( function () {
       overlay.parentNode.removeChild(overlay);

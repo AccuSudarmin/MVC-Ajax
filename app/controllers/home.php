@@ -10,8 +10,8 @@
 
 			//first form
 			$this->hiccup->openForm( array(
-				"urlsuccess" => SITE_PATH . "/ajaxpost" ,
-        "urltarget" => SITE_PATH . "/ajaxpost/save" ,
+				"urlsuccess" => SITE_PATH . "/home" ,
+        "urltarget" => SITE_PATH . "/home/save" ,
         "controller" => "defpost" ,
 				"method" => "POST"
       ));
@@ -21,8 +21,8 @@
 
 			//second form
 			$this->hiccup->openForm( array(
-				"urlsuccess" => SITE_PATH . "/ajaxpost" ,
-				"urltarget" => SITE_PATH . "/ajaxpost/update" ,
+				"urlsuccess" => SITE_PATH . "/home" ,
+				"urltarget" => SITE_PATH . "/home/update" ,
 				"controller" => "udpatepost" ,
 				"method" => "POST"
 			));
@@ -34,6 +34,16 @@
 			$form = $this->hiccup->render();
 
 			$this->view('home', array( "form" => $form ));
+		}
+
+		public function save() {
+			$data = array ( "message" => $_POST['nama'] );
+			echo json_encode($data);
+		}
+
+		public function update() {
+			$news = array( "message" => "<b>Bold</b> <i>Italic</i>" );
+			echo json_encode($news);
 		}
 	}
 

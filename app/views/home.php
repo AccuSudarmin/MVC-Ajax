@@ -3,6 +3,7 @@
 
   <head>
     <title> MVC </title>
+    <link href="<?php echo SITE_PATH; ?>/public/css/hiccup.css" rel="stylesheet">
   </head>
   <body>
     <p> Welcome to MVCAjax Framework </p>
