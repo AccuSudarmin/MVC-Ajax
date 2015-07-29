@@ -87,12 +87,12 @@ var hiccupController = function (form) {
   }
 
   this.onsubmit = function () {
-    ajax = new hiccupAjax(this);
+    var ajax = new hiccupAjax(this);
 
     if (this.Method === "POST" || this.Method === 'POST') {
       form.addEventListener('submit' , function () {
         ajax.post();
-        
+
         if(event.preventDefault) event.preventDefault()
         else event.returnValue = false;
       });
@@ -104,9 +104,8 @@ var hiccupController = function (form) {
         else event.returnValue = false;
       });
     }
-
-
   }
+  
 }
 
 var scanHTML = function () {
@@ -120,6 +119,9 @@ var scanHTML = function () {
 
     controller[i].onsubmit();
   }
+
+  console.log(controller[0]);
+  console.log(controller[1]);
 }
 
 window.onload = function () {
