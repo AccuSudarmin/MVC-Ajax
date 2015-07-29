@@ -11,7 +11,7 @@ var hiccupAjax = function (obj) {
 
     xmlhttp.onprogress = function (evt) {
       var percentComplete = (evt.loaded / evt.total) * 100;
-      obj.onprogress( JSON.parse(xmlhttp.responseText) );
+      obj.onprogress( percentComplete );
     }
 
     xmlhttp.open("POST", obj.URLtarget , true);
