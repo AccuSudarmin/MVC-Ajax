@@ -33,7 +33,7 @@
 
     public function save() {
 			$data = array ( "message" => $_POST['nama'] );
-			echo json_encode($news);
+			echo json_encode($data);
     }
 
 		public function update() {
