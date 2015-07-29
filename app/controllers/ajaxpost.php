@@ -36,7 +36,9 @@
     }
 
 		public function update() {
-			echo "<b>updateki</b> <input type='text'>";
+			$news = array( "message" => "<b>Bold</b> <i>Italic</i>" );
+
+			echo json_encode($news);
 		}
 
 	}

@@ -4,13 +4,14 @@ var hiccupAjax = function (obj) {
 
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        obj.onsuccess(xmlhttp.responseText);
+        var response = JSON.parse(xmlhttp.responseText);
+        obj.onsuccess( response.message );
       }
     }
 
     xmlhttp.onprogress = function (evt) {
       var percentComplete = (evt.loaded / evt.total) * 100;
-      obj.onprogress(percentComplete);
+      obj.onprogress( JSON.parse(xmlhttp.responseText) );
     }
 
     xmlhttp.open("POST", obj.URLtarget , true);
@@ -23,7 +24,8 @@ var hiccupAjax = function (obj) {
 
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        obj.onsuccess(xmlhttp.responseText);
+        var response = JSON.parse(xmlhttp.responseText);
+        obj.onsuccess( response.message );
       }
     }
 
@@ -105,7 +107,7 @@ var hiccupController = function (form) {
       });
     }
   }
-  
+
 }
 
 var scanHTML = function () {
@@ -114,14 +116,9 @@ var scanHTML = function () {
     , ajax = [];
 
   for (var i = 0; i < form.length; i++) {
-
     controller[i] = new hiccupController(form[i]);
-
     controller[i].onsubmit();
   }
-
-  console.log(controller[0]);
-  console.log(controller[1]);
 }
 
 window.onload = function () {
