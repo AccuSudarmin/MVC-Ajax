@@ -32,12 +32,12 @@
 		}
 
     public function save() {
-			echo $_POST['nama'];
+			$data = array ( "message" => $_POST['nama'] );
+			echo json_encode($news);
     }
 
 		public function update() {
 			$news = array( "message" => "<b>Bold</b> <i>Italic</i>" );
-
 			echo json_encode($news);
 		}
 
