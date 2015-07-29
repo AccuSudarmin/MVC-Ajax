@@ -5,7 +5,7 @@ var hiccupAjax = function (obj) {
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         var response = JSON.parse(xmlhttp.responseText);
-        obj.onsuccess( response.message );
+        obj.onsuccess( response );
       }
     }
 
@@ -25,7 +25,7 @@ var hiccupAjax = function (obj) {
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         var response = JSON.parse(xmlhttp.responseText);
-        obj.onsuccess( response.message );
+        obj.onsuccess( response );
       }
     }
 
@@ -84,7 +84,27 @@ var hiccupController = function (form) {
   };
 
   this.onsuccess = function ( response ){
-    createOverlay( response );
+    switch (response.type) {
+      case 'modal-box':
+        createOverlay ( response.message );
+        break;
+      case 'validation':
+
+        break;
+      case 'own-div':
+        document.getElementById( response.targetDiv ).insertAdjacentHTML( 'afterend', response.message );
+        break;
+      default:
+        createOverlay( response );
+    }
+
+    if (this.URLsuccess) {
+      var delayTime = response.delayURL || 3000
+        , url = this.URLsuccess;
+      setTimeout( function () {
+        window.location.href = url;
+      }, delayTime);
+    }
   }
 
   this.onprogress = function ( evt ) {
