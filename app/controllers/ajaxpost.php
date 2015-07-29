@@ -5,16 +5,17 @@
 
 		public function index()
     {
-      $this->library('Ajax', array(
-				"target" => SITE_PATH . "/ajaxpost" ,
-        "action" => SITE_PATH . "/ajaxpost/save" ,
-        "controller" => "def-post"
+      $this->library('Hiccup', array(
+				"urlsuccess" => SITE_PATH . "/ajaxpost" ,
+        "urltarget" => SITE_PATH . "/ajaxpost/save" ,
+        "controller" => "defpost" ,
+				"method" => "POST"
       ));
 
-      $this->ajax->input( array( "type" => "text" , "name" => "nama" , "required" => true ));
-      $this->ajax->input( array( "type" => "submit" , "name" => "save" , "value" => "Save" ));
+      $this->hiccup->input( array( "type" => "text" , "name" => "nama" , "required" => true ));
+      $this->hiccup->input( array( "type" => "submit" , "name" => "save" , "value" => "Save" ));
 
-      $form = $this->ajax->render();
+      $form = $this->hiccup->render();
 
       echo $form;
 		}
