@@ -1,32 +1,39 @@
 <?php
-
+	/*example for calling model in controller
+		$slider = $this->model('slider');
+		$article = $this->model('article');
+	*/
 	class Home extends Controller
 	{
 		public function index(){
+			$this->library('Hiccup');
 
-			// $this->view('header');
-			// $this->view('navbar');
+			//first form
+			$this->hiccup->openForm( array(
+				"urlsuccess" => SITE_PATH . "/ajaxpost" ,
+        "urltarget" => SITE_PATH . "/ajaxpost/save" ,
+        "controller" => "defpost" ,
+				"method" => "POST"
+      ));
+			$this->hiccup->input( array( "type" => "text" , "name" => "nama" , "required" => true ));
+			$this->hiccup->input( array( "type" => "submit" , "name" => "save" , "value" => "Save" ));
+			$this->hiccup->closeForm();
 
-			// $slider = $this->model('slider');
-			// $article = $this->model('article');
+			//second form
+			$this->hiccup->openForm( array(
+				"urlsuccess" => SITE_PATH . "/ajaxpost" ,
+				"urltarget" => SITE_PATH . "/ajaxpost/update" ,
+				"controller" => "udpatepost" ,
+				"method" => "POST"
+			));
 
-			// $this->library('dbsql');
+			$this->hiccup->input( array( "type" => "text" , "name" => "nama" , "required" => true ));
+			$this->hiccup->input( array( "type" => "submit" , "name" => "save" , "value" => "Save" ));
+			$this->hiccup->closeForm();
 
-			// echo "<div id='main'>";
-			// 	$this->view('home/slider', array($slider->total() , $slider->all()));
-			// 	$this->view('home/top-post', array($article->topPost(3)));
+			$form = $this->hiccup->render();
 
-			// echo "	<div id='content-home' class='container_24'>
-			// 			<div id='content-home' class='container_24'>
-			// 	";
-			// 		$this->view('home/article', array($article->getLimit(0,5)));
-			// 		$this->view('sidebar', array($article->topPost(5,'berita')));
-			// echo "		</div>
-			// 		</div>
-			// 	";
-
-			// echo "</div>";
-
+			$this->view('home', array( "form" => $form ));
 		}
 	}
 

@@ -1,19 +1,26 @@
 <?php
 class Hiccup {
 
-  function __construct ( $setting = array() ) {
-    /*
-      {action: http://contoh.com/savedata.php , controller: default, target: http://contoh.com , id: idnya}
-    */
-    $this->openForm = "<form ";
-    $this->openForm .= isset( $setting['method'] ) ? "method='" . $setting['method'] ."' " : "method='POST' ";
-    $this->openForm .= "in-controller='" . $setting['controller'] . "' in-target='" . $setting['urltarget'] . "' , in-success='" . $setting['urlsuccess'] . "' ";
-    $this->openForm .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" : "";
-    $this->openForm .= ">";
+  function __construct () {
+    $this->form = "";
+    $this->input = "";
+  }
+
+  public function openForm ( $setting = array() ) {
+    //example data array('controller' => 'name_controller', 'method' => 'POST' , 'urltarget' => 'http://hiccup.com/news/save', 'urlsuccess' => 'http://hiccup.com')
+    $this->form .= "<form ";
+    $this->form .= isset( $setting['method'] ) ? "method='" . $setting['method'] ."' " : "method='POST' ";
+    $this->form .= "in-controller='" . $setting['controller'] . "' in-target='" . $setting['urltarget'] . "' , in-success='" . $setting['urlsuccess'] . "' ";
+    $this->form .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" : "";
+    $this->form .= ">";
+
+  }
+
+  public function closeForm () {
+    $this->form .= $this->input;
+    $this->form .= "</form>";
 
     $this->input = "";
-
-    $this->endForm = "</form>";
   }
 
   public function input ( $setting = array() ) {
@@ -57,7 +64,7 @@ class Hiccup {
 
   public function render() {
     $ajax = "<script src='" . SITE_PATH . "/public/js/lib/hiccup.js'></script>";
-    $render = $this->openForm . $this->input . $this->endForm . $ajax;
+    $render = $this->form . $ajax;
 
     return $render;
   }
