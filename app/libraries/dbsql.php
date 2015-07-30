@@ -8,15 +8,15 @@ class dbsql {
         if(mysqli_connect_errno()){
             return false;
         } else {
-            return true; 
+            return true;
         }
     }
 
-    public function select($sql = []) {
+    public function select($sql = array()) {
         $q = "SELECT ";
 
         if (isset($sql['select'])) {
-            $q .= $sq['select'];  
+            $q .= $sq['select'];
         } else {
             $q .= "*";
         }
@@ -75,39 +75,39 @@ class dbsql {
 
     		for ($i=0; $i < count($col); $i++) {
     			if ($i == 0) $q .= $col[$i];
-    			else $q .= ",".$col[$i]; 
+    			else $q .= ",".$col[$i];
     		}
     		$q .= ")";
-			
+
     	}
 
     	$q .=  " VALUES (";
-    	for ($i=0; $i < count($val); $i++) { 
-    		if ($i == 0) $q .= "'".$val[$i]."'";	
+    	for ($i=0; $i < count($val); $i++) {
+    		if ($i == 0) $q .= "'".$val[$i]."'";
     		else $q .=",'".$val[$i]."'";
     	}
     	$q .= ")";
 
     	$insert = mysqli_query($this->con,$q);
-    	
+
     	if ($insert) return true;
     	else return false;
     }
-    
+
     public function delete($table,$where){
     	$q = "DELETE FROM $table";
     	if ($where != null) {
     		$q .= " WHERE $where";
     	}
     	$delete = mysqli_query($this->con,$q);
-    	
+
     	if ($delete) return true;
     	else return false;
     }
-    
+
     public function update($table,$val,$col,$where){
     	$q = "UPDATE $table SET ";
-    	for ($i=0; $i < count($val); $i++) { 
+    	for ($i=0; $i < count($val); $i++) {
     		if ($i == 0) $q .= $col[$i]."='".$val[$i]."'";
     		else $q .= ",".$col[$i]."='".$val[$i]."'";
     	}
@@ -134,7 +134,7 @@ class dbsql {
         }
         $i = 0;
         while ($data = mysqli_fetch_array($this->query)) {
-            for ($a=0; $a < count($fields); $a++) { 
+            for ($a=0; $a < count($fields); $a++) {
                 $name = $fields[$a];
                 $result[$i][$name] = $data[$name];
             }
@@ -149,7 +149,7 @@ class dbsql {
         if ($where != null) {
             $q .= " WHERE ".$where;
         }
-        
+
         $this->query = mysqli_query($this->con,$q);
         if ($this->query) {
             return true;
@@ -160,6 +160,6 @@ class dbsql {
 
     function __destruct(){
         mysqli_close($this->con);
-    } 
+    }
 }
 ?>

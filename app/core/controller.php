@@ -7,7 +7,7 @@
 			return new $model;
 		}
 
-		public function view($view, $data = []){
+		public function view($view, $data = array()){
 
 			foreach ($data as $key => $value) {
 				${$key} = $value;
@@ -18,7 +18,7 @@
 
 		public function library($lib, $param = null) {
 			require_once './app/libraries/' . $lib . '.php';
-			
+
 			if (class_exists($lib)) {
 				//chekking if class exist  in new library
 

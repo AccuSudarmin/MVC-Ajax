@@ -1,7 +1,8 @@
 <?php
 class Hiccup {
 
-  function __construct () {
+  function __construct ( $URLjs = null ) {
+    $this->URLjs = $URLjs;
     $this->form = "";
     $this->input = "";
   }
@@ -64,7 +65,7 @@ class Hiccup {
   }
 
   public function render() {
-    $ajax = "<script src='" . SITE_PATH . "/public/js/lib/hiccup.js'></script>";
+    $ajax = "<script src='" . $this->URLjs . "'></script>";
     $render = $this->form . $ajax;
 
     return $render;

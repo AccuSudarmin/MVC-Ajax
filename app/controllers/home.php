@@ -6,7 +6,7 @@
 	class Home extends Controller
 	{
 		public function index(){
-			$this->library('Hiccup');
+			$this->library('Hiccup', SITE_PATH . "/public/js/lib/hiccup.js");
 
 			$this->hiccup->openForm( array(
 				"urlsuccess" => SITE_PATH . "/home" ,
