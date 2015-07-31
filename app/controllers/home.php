@@ -32,7 +32,6 @@
 			);
 
 			echo json_encode($data);
-			echo "coba";
 		}
 
 	}
