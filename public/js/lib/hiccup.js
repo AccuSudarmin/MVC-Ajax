@@ -174,12 +174,13 @@ var hiccupInputController = function (input) {
             if (document.getElementById('suggest-box')) {
                document.getElementById('suggest-box').parentNode.removeChild(document.getElementById('suggest-box'));
             }
+
             var suggestBox = ElementBuild({tag: 'div', id:'suggest-box'});
 
             for (var i = 0; i < response.option.length; i++) {
                (function (i) {
-
-                  optionElm[i] = ElementBuild({'tag' : 'li'}, response.option[i].key);
+                  var cls = ( response.option[i].class ) ? response.option[i].class : "suggest-content";
+                  optionElm[i] = ElementBuild({'tag' : 'li' , 'class' : cls}, response.option[i].key);
                   optionElm[i].addEventListener('click' , function () {
                      input.value = response.option[i].val;
                      suggestBox.parentNode.removeChild(suggestBox);
@@ -190,6 +191,8 @@ var hiccupInputController = function (input) {
             }
 
             suggestBox.style.position = "absolute";
+            suggestBox.style.textAlign = "left";
+            suggestBox.style.left = this.offsetLeft + "px";
             input.parentNode.insertBefore(suggestBox, input.nextSibling);
 
             break;

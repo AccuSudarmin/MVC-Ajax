@@ -1,0 +1,17 @@
+html, body {
+   padding: 0;
+   margin: 0;
+}
+
+.box {
+   width: 100%;
+   background: #DBDDE8;
+   padding: 10px;
+   box-sizing: border-box;
+   border-top: 2px solid #D1D3E0;
+   border-bottom: 2px solid #D1D3E0;
+}
+
+.input-box {
+   padding: 5px;
+}

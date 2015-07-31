@@ -18,13 +18,15 @@
 			$this->hiccup->input( array(
 				"type" => "text" ,
 				"name" => "nama" ,
-				"required" => true
+				"required" => true ,
+				"p" => true
 			));
 
 			$this->hiccup->input( array(
 				"type" => "submit" ,
 				"name" => "save" ,
-				"value" => "Save"
+				"value" => "Save" ,
+				"p" => true
 			));
 
 			$this->hiccup->closeForm();
@@ -32,8 +34,10 @@
 
 			$this->hiccup->input( array(
 				"type" => "text" ,
-				"name" => "search" ,
+				"name" => "color" ,
 				"controller" => "search" ,
+				"placeholder" => "Enter favourite color" ,
+				"class" => "input-box" ,
 				"urltarget" => SITE_PATH . "/home/search"
 			));
 
@@ -53,13 +57,17 @@
 		}
 
 		public function search() {
+			$input = preg_quote($_POST['color'], '~'); // don't forget to quote input string!
+			$data = array('orange', 'blue', 'green', 'red', 'pink', 'brown', 'black');
+			$result = preg_grep('~' . $input . '~', $data);
+
+			$option = array();
+			foreach ($result as $col) {
+				array_push($option, array("key" => $col, "val" => $col));
+			}
 			$data = array (
 				"type" => "suggestion" ,
-				"option" => array(
-					array("key" => "First Value" , "val" => "First Value") ,
-					array("key" => "Second Value" , "val" => "Second Value") ,
-					array("key" => "Thir Value" , "val" => "Third Value")
-				)
+				"option" => $option
 			);
 
 			echo json_encode($data);
