@@ -11,8 +11,8 @@ class Hiccup {
     //example data array('controller' => 'name_controller', 'method' => 'POST' , 'urltarget' => 'http://hiccup.com/news/save', 'urlsuccess' => 'http://hiccup.com')
     $this->form .= "<form ";
     $this->form .= isset( $setting['method'] ) ? "method='" . $setting['method'] ."' " : "method='POST' ";
-    $this->form .= "in-controller='" . $setting['controller'] . "' in-target='" . $setting['urltarget'] . "' ";
-    $this->form .= isset( $setting['urlsuccess'] ) ? "in-success='" . $setting['urlsuccess'] . "' " : "";
+    $this->form .= "fm-controller='" . $setting['controller'] . "' fm-target='" . $setting['urltarget'] . "' ";
+    $this->form .= isset( $setting['urlsuccess'] ) ? "fm-success='" . $setting['urlsuccess'] . "' " : "";
     $this->form .= isset( $setting['class'] ) ? "class='" . $setting['class'] . "' " : "";
     $this->form .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" : "";
     $this->form .= ">";

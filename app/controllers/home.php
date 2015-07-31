@@ -21,6 +21,7 @@
 			$form = $this->hiccup->render();
 
 			$this->view('home', array( "form" => $form ));
+			$this->view('input');
 		}
 
 		public function save() {
@@ -29,6 +30,19 @@
 				"type" => "modal-box" ,
 				"delayURL" => 5000 ,
 				"targetDiv" => "coba"
+			);
+
+			echo json_encode($data);
+		}
+
+		public function cari() {
+			$data = array (
+				"type" => "suggestion" ,
+				"option" => array(
+					array("message" => "tes") ,
+					array("message" => "coba") ,
+					array("message" => "lagi")
+				)
 			);
 
 			echo json_encode($data);
