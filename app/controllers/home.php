@@ -10,18 +10,35 @@
 
 			$this->hiccup->openForm( array(
 				"urlsuccess" => SITE_PATH . "/home" ,
-        "urltarget" => SITE_PATH . "/home/save" ,
-        "controller" => "defpost" ,
+				"urltarget" => SITE_PATH . "/home/save" ,
+   			"controller" => "defpost" ,
 				"method" => "POST"
-      ));
-			$this->hiccup->input( array( "type" => "text" , "name" => "nama" , "required" => true ));
-			$this->hiccup->input( array( "type" => "submit" , "name" => "save" , "value" => "Save" ));
-			$this->hiccup->closeForm();
+      	));
 
+			$this->hiccup->input( array(
+				"type" => "text" ,
+				"name" => "nama" ,
+				"required" => true
+			));
+
+			$this->hiccup->input( array(
+				"type" => "submit" ,
+				"name" => "save" ,
+				"value" => "Save"
+			));
+
+			$this->hiccup->closeForm();
 			$form = $this->hiccup->render();
 
-			$this->view('home', array( "form" => $form ));
-			$this->view('input');
+			$this->hiccup->input( array(
+				"type" => "text" ,
+				"name" => "search" ,
+				"controller" => "search" ,
+				"urltarget" => SITE_PATH . "/home/search"
+			));
+
+			$input = $this->hiccup->render();
+			$this->view('home', array( "form" => $form , "input" => $input ));
 		}
 
 		public function save() {
@@ -35,13 +52,13 @@
 			echo json_encode($data);
 		}
 
-		public function cari() {
+		public function search() {
 			$data = array (
 				"type" => "suggestion" ,
 				"option" => array(
-					array("message" => "tes" , "val" => "tes") ,
-					array("message" => "coba" , "val" => "coba") ,
-					array("message" => "lagi" , "val" => "lagi")
+					array("key" => "First Value" , "val" => "First Value") ,
+					array("key" => "Second Value" , "val" => "Second Value") ,
+					array("key" => "Thir Value" , "val" => "Third Value")
 				)
 			);
 

@@ -145,6 +145,9 @@ var hiccupFormController = function (form) {
 
 var hiccupInputController = function (input) {
    this.URLtarget = input.getAttribute("in-target") || null;
+   this.offsetTop = input.offsetTop;
+   this.offsetLeft = input.offsetLeft;
+   this.offsetHeight = input.offsetHeight;
 
    var ElementBuild = function ( element , inner ){
       var elm = document.createElement( element.tag );
@@ -175,7 +178,8 @@ var hiccupInputController = function (input) {
 
             for (var i = 0; i < response.option.length; i++) {
                (function (i) {
-                  optionElm[i] = ElementBuild({'tag' : 'li'}, response.option[i].message);
+
+                  optionElm[i] = ElementBuild({'tag' : 'li'}, response.option[i].key);
                   optionElm[i].addEventListener('click' , function () {
                      input.value = response.option[i].val;
                      suggestBox.parentNode.removeChild(suggestBox);
@@ -185,7 +189,8 @@ var hiccupInputController = function (input) {
                }(i));
             }
 
-            document.body.insertBefore(suggestBox, document.body.firstChild);
+            suggestBox.style.position = "absolute";
+            input.parentNode.insertBefore(suggestBox, input.nextSibling);
 
             break;
       }
