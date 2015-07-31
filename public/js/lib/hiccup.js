@@ -174,15 +174,15 @@ var hiccupInputController = function (input) {
             var suggestBox = ElementBuild({tag: 'div', id:'suggest-box'});
 
             for (var i = 0; i < response.option.length; i++) {
+               (function (i) {
+                  optionElm[i] = ElementBuild({'tag' : 'li'}, response.option[i].message);
+                  optionElm[i].addEventListener('click' , function () {
+                     input.value = response.option[i].val;
+                     suggestBox.parentNode.removeChild(suggestBox);
+                  });
 
-               optionElm[i] = ElementBuild({'tag' : 'li'}, response.option[i].message);
-               optionElm[i].addEventListener('click' , function () {
-                  input.value = response.option[i].val;
-                  suggestBox.parentNode.removeChild(suggestBox);
-               });
-
-               suggestBox.appendChild(optionElm[i]);
-
+                  suggestBox.appendChild(optionElm[i]);
+               }(i));
             }
 
             document.body.insertBefore(suggestBox, document.body.firstChild);

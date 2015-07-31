@@ -39,9 +39,9 @@
 			$data = array (
 				"type" => "suggestion" ,
 				"option" => array(
-					array("message" => "tes") ,
-					array("message" => "coba") ,
-					array("message" => "lagi")
+					array("message" => "tes" , "val" => "tes") ,
+					array("message" => "coba" , "val" => "coba") ,
+					array("message" => "lagi" , "val" => "lagi")
 				)
 			);
 
