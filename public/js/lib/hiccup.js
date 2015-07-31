@@ -5,12 +5,12 @@ var hiccupAjax = function (obj) {
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         try {
-        var response = JSON.parse(xmlhttp.responseText);
-        obj.onsuccess( response );
-      } catch (e) {
-        console.log(e);
-        console.log(xmlhttp.responseText);
-      }
+          var response = JSON.parse(xmlhttp.responseText);
+          obj.onsuccess( response );
+        } catch (e) {
+          console.log(e);
+          console.log(xmlhttp.responseText);
+        }
       }
     }
 
@@ -30,12 +30,12 @@ var hiccupAjax = function (obj) {
     xmlhttp.onreadystatechange = function() {
       if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
         try {
-        var response = JSON.parse(xmlhttp.responseText);
-        obj.onsuccess( response );
-      } catch (e) {
-        console.log(e);
-        console.log(xmlhttp.responseText);
-      }
+          var response = JSON.parse(xmlhttp.responseText);
+          obj.onsuccess( response );
+        } catch (e) {
+          console.log(e);
+          console.log(xmlhttp.responseText);
+        }
       }
     }
 
