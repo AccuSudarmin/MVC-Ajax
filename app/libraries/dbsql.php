@@ -3,8 +3,8 @@ class dbsql {
 	private $con;
     public $query;
 
-    function __construct(){
-        $this->con = mysqli_connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+    function __construct($DB_HOST,$DB_USER,$DB_PASS,$DB_NAME){
+        $this->con = mysqli_connect($DB_HOST,$DB_USER,$DB_PASS,$DB_NAME);
         if(mysqli_connect_errno()){
             return false;
         } else {
@@ -12,7 +12,7 @@ class dbsql {
         }
     }
 
-    public function select($sql = array()) {
+    public function select( $sql = array() ) {
         $q = "SELECT ";
 
         if (isset($sql['select'])) {
@@ -22,7 +22,6 @@ class dbsql {
         }
 
         $q .= " FROM " . $sql['table'];
-    	$i = 0;
 
         if (isset($sql['where'])) {
             $q .= " WHERE " . $sql['where'];
@@ -38,53 +37,65 @@ class dbsql {
 
     	$this->query = mysqli_query($this->con,$q);
 
-        if ($this->query) {
-            return true;
-        } else {
-            return false;
-        }
+      if ($this->query) {
+        return true;
+      } else {
+      	return false;
+      }
     }
 
-    public function inner_join($table1,$table2,$on,$where,$select,$order){
+    public function inner_join( $sql = array() ){
         $q = "SELECT ";
-        if ($select != null) {
-            $q .= $select;
+
+				if (isset($sql['select'])) {
+            $q .= $sq['select'];
         } else {
             $q .= "*";
         }
-        $q .= " FROM ".$table1." INNER JOIN ".$table2." ON ".$on;
-        $i = 0;
-        if ($where != null) {
-            $q .= " WHERE ".$where;
+
+        $q .= " FROM " . $sql['table1'] . " INNER JOIN " . $sql['table2'] . " ON " . $sql['on'];
+
+        if (isset($sql['where'])) {
+            $q .= " WHERE " . $sql['where'];
         }
-         if ($order != null) {
-           $q .= " ORDER BY ".$order;
+
+        if (isset($sql['order'])) {
+           $q .= " ORDER BY " . $sql['order'];
         }
-        $this->query = mysqli_query($this->con,$q);
-        if ($this->query) {
-            return true;
-        } else {
-            return false;
+
+        if (isset($sql['limit'])) {
+            $q .= " LIMIT " . $sql['limit'];
         }
+
+				$this->query = mysqli_query($this->con,$q);
+
+	      if ($this->query) {
+	      	return true;
+	      } else {
+	      	return false;
+	      }
+
     }
 
-    public function insert($table,$val,$col) {
-    	$q = "INSERT INTO $table";
-    	if ($col != null) {
+    public function insert( $sql = array() ) {
+    	$q = "INSERT INTO " . $sql['table'];
+    	if ( isset( $sql['column'] ) ) {
     		$q .= " (";
+				$i = 0;
+				foreach ($sql['column'] as $col) {
+    			if ($i == 0) $q .= $col;
+    			else $q .= ",".$col;
 
-    		for ($i=0; $i < count($col); $i++) {
-    			if ($i == 0) $q .= $col[$i];
-    			else $q .= ",".$col[$i];
+					$i++;
     		}
     		$q .= ")";
-
     	}
 
     	$q .=  " VALUES (";
-    	for ($i=0; $i < count($val); $i++) {
-    		if ($i == 0) $q .= "'".$val[$i]."'";
-    		else $q .=",'".$val[$i]."'";
+			$i = 0;
+    	foreach ($sql['value'] as $val) {
+    		if ($i == 0) $q .= "'".$val."'";
+    		else $q .=",'".$val."'";
     	}
     	$q .= ")";
 
@@ -94,10 +105,10 @@ class dbsql {
     	else return false;
     }
 
-    public function delete($table,$where){
-    	$q = "DELETE FROM $table";
-    	if ($where != null) {
-    		$q .= " WHERE $where";
+    public function delete( $sql = array() ){
+    	$q = "DELETE FROM " . $sql['table'];
+    	if ( isset( $sql['where'] ) ) {
+    		$q .= " WHERE " . $sql['where'];
     	}
     	$delete = mysqli_query($this->con,$q);
 
@@ -105,15 +116,17 @@ class dbsql {
     	else return false;
     }
 
-    public function update($table,$val,$col,$where){
-    	$q = "UPDATE $table SET ";
-    	for ($i=0; $i < count($val); $i++) {
-    		if ($i == 0) $q .= $col[$i]."='".$val[$i]."'";
-    		else $q .= ",".$col[$i]."='".$val[$i]."'";
+    public function update ( $sql = array() ){
+    	$q = "UPDATE " . $sql['table'] . " SET ";
+
+			for ($i=0; $i < count($sql['value']); $i++) {
+    		if ($i === 0) $q .= $sql['column'][$i] . "='" . $sql['value'][$i] . "'";
+    		else $q .= "," . $sql['column'][$i] . "='" . $sql['value'][$i] . "'";
     	}
-    	if ($where != null) {
-    		$q .= " WHERE $where";
+    	if ( isset( $sql['ewher'] ) ) {
+    		$q .= " WHERE " . $sql['where'];
     	}
+
     	$update = mysqli_query($this->con,$q);
     	if ($update) return true;
     	else return false;
@@ -143,11 +156,11 @@ class dbsql {
         return $result;
     }
 
-    public function update_injoin($table1,$table2,$on,$where){
+    public function update_injoin( $sql = array() ){
         $q = "UPDATE ";
-        $q .= " FROM ".$table1." INNER JOIN ".$table2." ON ".$on;
-        if ($where != null) {
-            $q .= " WHERE ".$where;
+        $q .= " FROM " . $sql['table1'] . " INNER JOIN " . $sql['table2'] . " ON " . $sql['on'];
+        if ( isset( $sql['where'] ) ) {
+            $q .= " WHERE " . $sql['where'];
         }
 
         $this->query = mysqli_query($this->con,$q);

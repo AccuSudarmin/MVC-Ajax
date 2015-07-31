@@ -13,6 +13,7 @@ class Hiccup {
     $this->form .= isset( $setting['method'] ) ? "method='" . $setting['method'] ."' " : "method='POST' ";
     $this->form .= "in-controller='" . $setting['controller'] . "' in-target='" . $setting['urltarget'] . "' ";
     $this->form .= isset( $setting['urlsuccess'] ) ? "in-success='" . $setting['urlsuccess'] . "' " : "";
+    $this->form .= isset( $setting['class'] ) ? "class='" . $setting['class'] . "' " : "";
     $this->form .= isset( $setting['id'] ) ? " id='" . $setting['id'] . "'" : "";
     $this->form .= ">";
 
