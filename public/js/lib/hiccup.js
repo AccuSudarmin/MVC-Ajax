@@ -183,11 +183,9 @@ var hiccupInputController = function (input) {
    var addEventClickList = function ( option , optionElm , suggestBox , optMultiple ) {
       if ( optMultiple ) {
          optionElm.addEventListener('click' , function () {
-
             for (var i = 0; i < option.list.length; i++) {
                _( option.list[i].target ).value = option.list[i].val;
             }
-
             suggestBox.parentNode.removeChild(suggestBox);
          });
       } else {
