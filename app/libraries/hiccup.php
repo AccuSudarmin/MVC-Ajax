@@ -24,7 +24,7 @@ class Hiccup {
 
    public function input ( $setting = array() ) {
       $input =  (isset ( $setting['p'] ) && $setting['p'] == true ) ? "<p>" : "";
-      $input .=" <input type='";
+      $input .="<input type='";
       $input .= isset( $setting['type'] ) ? $setting['type'] . "' " : "text' ";
       $input .= isset ( $setting['controller'] ) ? "in-controller= '" . $setting['controller'] . "' " : "";
       $input .= isset ( $setting['urltarget'] ) ? "in-target= '" . $setting['urltarget'] . "' " : "";
@@ -66,7 +66,9 @@ class Hiccup {
    }
 
    public function render() {
-      $render = $this->form . $this->input . $this->closeForm;
+      $render = isset($this->form) ? $this->form : "";
+      $render .= $this->input;
+      $render .= isset($this->closeForm) ? $this->closeForm : "";
 
       $this->form = "";
       $this->input = "";

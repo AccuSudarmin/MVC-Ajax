@@ -1,17 +1,79 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(http://fonts.googleapis.com/css?family=Orbitron);
+
 html, body {
    padding: 0;
    margin: 0;
+   min-width: 100%;
+   min-height: 100%;
+}
+
+body {
+
 }
 
 .box {
    width: 100%;
-   background: #DBDDE8;
    padding: 10px;
    box-sizing: border-box;
    border-top: 2px solid #D1D3E0;
    border-bottom: 2px solid #D1D3E0;
 }
 
+.box:nth-child(2n+1) {
+   background: #DBDDE8;
+}
+
+.header {
+   background: #F64744;
+   text-align: center;
+   padding: 20px;
+   box-sizing: border-box;
+}
+
+.title , .sub-title {
+   display: block;
+   width: intrinsic;
+   width: -moz-max-content;
+   width: -webkit-max-content;
+   width: max-content;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.description {
+   text-align: center;
+   font-style: italic;
+}
+
+.title {
+   font-size: 30px;
+   color: #fff;
+   font-family: 'Orbitron', sans-serif;
+}
+.sub-title {
+   font-size: 13px;
+   color: white;
+   font-family: 'Oswald', sans-serif;
+}
+
+.searching-box , .desc-box {
+   width: intrinsic;
+   width: -moz-max-content;
+   width: -webkit-max-content;
+   width: max-content;
+   display: block;
+   margin: auto;
+   padding: 10px;
+}
+
 .input-box {
    padding: 5px;
+}
+
+.search {
+   padding: 7px;
+   background-color: #F64744;
+   border: 0px;
+   color: white;
 }

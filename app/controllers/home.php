@@ -8,6 +8,24 @@
 		public function index(){
 			$this->library('Hiccup', SITE_PATH . "/public/js/lib/hiccup.js");
 
+			$this->hiccup->input( array(
+				"type" => "text" ,
+				"name" => "color" ,
+				"controller" => "search" ,
+				"placeholder" => "Enter favourite color" ,
+				"class" => "input-box" ,
+				"urltarget" => SITE_PATH . "/home/search"
+			));
+
+			$this->hiccup->input( array(
+				"type" => "submit" ,
+				"name" => "search" ,
+				"class" => "search" ,
+				"value" => "Search"
+			));
+
+			$input = $this->hiccup->render();
+
 			$this->hiccup->openForm( array(
 				"urlsuccess" => SITE_PATH . "/home" ,
 				"urltarget" => SITE_PATH . "/home/save" ,
@@ -31,17 +49,6 @@
 
 			$this->hiccup->closeForm();
 			$form = $this->hiccup->render();
-
-			$this->hiccup->input( array(
-				"type" => "text" ,
-				"name" => "color" ,
-				"controller" => "search" ,
-				"placeholder" => "Enter favourite color" ,
-				"class" => "input-box" ,
-				"urltarget" => SITE_PATH . "/home/search"
-			));
-
-			$input = $this->hiccup->render();
 
 			$this->hiccup->input( array(
 				"type" => "text" ,
