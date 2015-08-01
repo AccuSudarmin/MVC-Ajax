@@ -111,7 +111,9 @@ var hiccupFormController = function (form) {
             createOverlay( response );
       }
 
-      if (this.URLsuccess) {
+      var success = ( "success" in response) ? response.success : true;
+
+      if (this.URLsuccess && success) {
          var delayTime = response.delayURL || 3000
             , url = this.URLsuccess;
 
@@ -128,14 +130,14 @@ var hiccupFormController = function (form) {
    this.onsubmit = function () {
       var ajax = new hiccupAjax(this);
 
-      if (this.Method === "POST" || this.Method === 'POST') {
+      if (this.Method === "POST" || this.Method === 'post') {
          form.addEventListener('submit' , function () {
             ajax.post();
 
             if(event.preventDefault) event.preventDefault()
             else event.returnValue = false;
          });
-      } else if (this.Method === "GET" || this.Method === 'GET') {
+      } else if (this.Method === "GET" || this.Method === 'get') {
          form.addEventListener('submit' , function () {
             ajax.get();
 
