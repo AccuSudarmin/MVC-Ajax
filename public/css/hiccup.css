@@ -6,6 +6,7 @@
   display: table;
   text-align: center;
   width: 100%;
+  top: 10%;
 }
 
 .hiccup-modal-box-inside {
@@ -16,11 +17,19 @@
   vertical-align: top;
   display: inline-block;
   padding: 10px;
-  border: 2px solid #bbb;
   border-radius: 10px;
+  background: #DBDDE8;
+  border: 2px solid #D1D3E0;
 }
 
 .suggest-content:hover {
    cursor: pointer;
    color: #bbb;
+}
+
+#suggest-box {
+   background: white;
+   list-style: none;
+   padding: 5px;
+   box-sizing: border-box;
 }

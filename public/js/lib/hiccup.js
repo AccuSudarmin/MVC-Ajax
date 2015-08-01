@@ -152,6 +152,7 @@ var hiccupInputController = function (input) {
    this.offsetTop = input.offsetTop;
    this.offsetLeft = input.offsetLeft;
    this.offsetHeight = input.offsetHeight;
+   this.offsetWidth = input.offsetWidth;
 
    var ElementBuild = function ( element , inner ){
       var elm = document.createElement( element.tag );
@@ -217,6 +218,7 @@ var hiccupInputController = function (input) {
             suggestBox.style.position = "absolute";
             suggestBox.style.textAlign = "left";
             suggestBox.style.left = this.offsetLeft + "px";
+            suggestBox.style.width = this.offsetWidth + "px";
             input.parentNode.insertBefore(suggestBox, input.nextSibling);
 
             break;

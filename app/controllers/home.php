@@ -20,7 +20,7 @@
 			$this->hiccup->input( array(
 				"type" => "submit" ,
 				"name" => "search" ,
-				"class" => "search" ,
+				"class" => "input-button" ,
 				"value" => "Search"
 			));
 
@@ -35,7 +35,18 @@
 
 			$this->hiccup->input( array(
 				"type" => "text" ,
-				"name" => "nama" ,
+				"name" => "firstname" ,
+				"placeholder" => "Firstname" ,
+				"class" => "input-box" ,
+				"required" => true ,
+				"p" => true
+			));
+
+			$this->hiccup->input( array(
+				"type" => "text" ,
+				"name" => "lastname" ,
+				"placeholder" => "Lastname" ,
+				"class" => "input-box" ,
 				"required" => true ,
 				"p" => true
 			));
@@ -43,6 +54,7 @@
 			$this->hiccup->input( array(
 				"type" => "submit" ,
 				"name" => "save" ,
+				"class" => "input-button" ,
 				"value" => "Save" ,
 				"p" => true
 			));
@@ -53,15 +65,10 @@
 			$this->hiccup->input( array(
 				"type" => "text" ,
 				"name" => "color" ,
+				"id" => "firstname" ,
 				"controller" => "searchMultiple" ,
 				"class" => "input-box" ,
 				"urltarget" => SITE_PATH . "/home/searchMultiple"
-			));
-
-			$this->hiccup->input( array(
-				"type" => "text" ,
-				"id" => "firstname" ,
-				"class" => "input-box"
 			));
 
 			$this->hiccup->input( array(
@@ -77,7 +84,7 @@
 
 		public function save() {
 			$data = array (
-				"message" => "<b>" . $_POST['nama'] . "</b>" ,
+				"message" => "<b>" . $_POST['firstname'] . " " . $_POST['lastname'] . "</b>" ,
 				"type" => "modal-box" ,
 				"delayURL" => 5000 ,
 				"targetDiv" => "coba"
@@ -109,14 +116,14 @@
 				"multiple" => true ,
 				"option" => array(
 					array(
-						"hint" => "Sulawesi Selatan" ,
+						"hint" => "Johnny Depp" ,
 						"list" => array(
 							array( "target" => "firstname" , "val" => "Johnny" ) ,
 							array( "target" => "lastname" , "val" => "Depp" )
 						)
 					) ,
 					array(
-						"hint" => "Jawa Barat" ,
+						"hint" => "Ryan Sheckler" ,
 						"list" => array(
 							array( "target" => "firstname" , "val" => "Ryan" ) ,
 							array( "target" => "lastname" , "val" => "Sheckler" )

@@ -31,11 +31,12 @@
       </div>
 
       <div class="box">
-         <div class="desc-box">
-            This is example for form submit using ajax with detect html attribute </p>
-         </div>
          <div class='searching-box'>
             <?php echo $form; ?>
+         </div>
+         <div class="desc-box">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <br>
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
          </div>
       </div>
 
