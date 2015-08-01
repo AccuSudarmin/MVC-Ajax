@@ -42,7 +42,30 @@
 			));
 
 			$input = $this->hiccup->render();
-			$this->view('home', array( "form" => $form , "input" => $input ));
+
+			$this->hiccup->input( array(
+				"type" => "text" ,
+				"name" => "color" ,
+				"controller" => "searchMultiple" ,
+				"class" => "input-box" ,
+				"urltarget" => SITE_PATH . "/home/searchMultiple"
+			));
+
+			$this->hiccup->input( array(
+				"type" => "text" ,
+				"id" => "firstname" ,
+				"class" => "input-box"
+			));
+
+			$this->hiccup->input( array(
+				"type" => "text" ,
+				"id" => "lastname" ,
+				"class" => "input-box"
+			));
+
+			$inputMultiple = $this->hiccup->render();
+
+			$this->view('home', array( "form" => $form , "input" => $input , "inputMultiple" => $inputMultiple));
 		}
 
 		public function save() {
@@ -63,11 +86,36 @@
 
 			$option = array();
 			foreach ($result as $col) {
-				array_push($option, array("key" => $col, "val" => $col));
+				array_push($option, array("hint" => $col, "val" => $col));
 			}
 			$data = array (
 				"type" => "suggestion" ,
 				"option" => $option
+			);
+
+			echo json_encode($data);
+		}
+
+		public function searchMultiple() {
+			$data = array (
+				"type" => "suggestion" ,
+				"multiple" => true ,
+				"option" => array(
+					array(
+						"hint" => "Sulawesi Selatan" ,
+						"list" => array(
+							array( "target" => "firstname" , "val" => "Johnny" ) ,
+							array( "target" => "lastname" , "val" => "Depp" )
+						)
+					) ,
+					array(
+						"hint" => "Jawa Barat" ,
+						"list" => array(
+							array( "target" => "firstname" , "val" => "Ryan" ) ,
+							array( "target" => "lastname" , "val" => "Sheckler" )
+						)
+					)
+				)
 			);
 
 			echo json_encode($data);

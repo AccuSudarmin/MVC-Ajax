@@ -19,6 +19,8 @@
 
       <div id="coba"> </div>
 
+      <?php echo $inputMultiple; ?>
+
       <script src="<?php echo SITE_PATH; ?>/public/js/lib/hiccup.js"></script>
    </body>
 

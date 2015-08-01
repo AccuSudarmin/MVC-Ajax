@@ -1,3 +1,7 @@
+var _ = function (id) {
+   return document.getElementById(id);
+}
+
 var hiccupAjax = function (obj) {
    this.post = function (){
       var xmlhttp = new XMLHttpRequest();
@@ -101,7 +105,7 @@ var hiccupFormController = function (form) {
          case 'validation':
             break;
          case 'own-div':
-            document.getElementById( response.targetDiv ).insertAdjacentHTML( 'afterend', response.message );
+            _( response.targetDiv ).insertAdjacentHTML( 'afterend', response.message );
             break;
          default:
             createOverlay( response );
@@ -160,10 +164,38 @@ var hiccupInputController = function (input) {
       return elm;
    }
 
+   var createListSuggestBox = function ( option , suggestBox ) {
+      var cls = ( option.class ) ? option.class : "suggest-content";
+      optionElm = ElementBuild({'tag' : 'li' , 'class' : cls}, option.hint);
+
+      suggestBox.appendChild(optionElm);
+
+      return optionElm;
+   }
+
    this.getValPost = function () {
       var data = input.name + "=" + input.value;
 
       return data;
+   }
+
+
+   var addEventClickList = function ( option , optionElm , suggestBox , optMultiple ) {
+      if ( optMultiple ) {
+         optionElm.addEventListener('click' , function () {
+
+            for (var i = 0; i < option.list.length; i++) {
+               _( option.list[i].target ).value = option.list[i].val;
+            }
+
+            suggestBox.parentNode.removeChild(suggestBox);
+         });
+      } else {
+         optionElm.addEventListener('click' , function () {
+            input.value = option.val;
+            suggestBox.parentNode.removeChild(suggestBox);
+         });
+      }
    }
 
    this.onsuccess = function ( response ){
@@ -171,22 +203,16 @@ var hiccupInputController = function (input) {
       switch (response.type) {
          case 'suggestion':
 
-            if (document.getElementById('suggest-box')) {
-               document.getElementById('suggest-box').parentNode.removeChild(document.getElementById('suggest-box'));
+            if (_('suggest-box')) {
+               _('suggest-box').parentNode.removeChild(document.getElementById('suggest-box'));
             }
 
             var suggestBox = ElementBuild({tag: 'div', id:'suggest-box'});
 
             for (var i = 0; i < response.option.length; i++) {
                (function (i) {
-                  var cls = ( response.option[i].class ) ? response.option[i].class : "suggest-content";
-                  optionElm[i] = ElementBuild({'tag' : 'li' , 'class' : cls}, response.option[i].key);
-                  optionElm[i].addEventListener('click' , function () {
-                     input.value = response.option[i].val;
-                     suggestBox.parentNode.removeChild(suggestBox);
-                  });
-
-                  suggestBox.appendChild(optionElm[i]);
+                  var optionElm = createListSuggestBox( response.option[i] , suggestBox );
+                  addEventClickList( response.option[i] , optionElm , suggestBox , response.multiple );
                }(i));
             }
 
