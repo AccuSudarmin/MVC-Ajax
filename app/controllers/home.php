@@ -86,8 +86,7 @@
 			$data = array (
 				"message" => "<b>" . $_POST['firstname'] . " " . $_POST['lastname'] . "</b>" ,
 				"type" => "modal-box" ,
-				"delayURL" => 5000 ,
-				"targetDiv" => "coba"
+				"delayURL" => 4000
 			);
 
 			echo json_encode($data);

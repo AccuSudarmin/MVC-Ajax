@@ -7,7 +7,7 @@
 
 	//site
 	define("WEB_TITLE", "MVC");
-	define("SITE_PATH", "http://localhost/mvc");
+	define("SITE_PATH", "http://localhost/mvcajax");
 
 	require_once './app/core/app.php';
 	require_once './app/core/controller.php';
